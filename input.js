@@ -1,5 +1,10 @@
 let connection;
 
+const msg = "Say: ";
+const hello = "Hello there!";
+const stay = "Stay a while...";
+const listen = "...and listen!";
+
 const setupInput = function(conn) {
   connection = conn;
   const stdin = process.stdin;
@@ -29,6 +34,15 @@ const handleUserInput = (key) => {
   }
   if (key === 'd') {
     connection.write("Move: right");
+  }
+  if (key === "h") {
+    connection.write(msg + hello);
+  }
+  if (key === "j") {
+    connection.write(msg + stay);
+  }
+  if (key === 'k') {
+    connection.write(msg + listen);
   }
 };
 
