@@ -1,3 +1,5 @@
+const { UPKEY, LEFTKEY, DOWNKEY, RIGHTKEY } = require('./constants.js');
+
 let connection;
 
 const msg = "Say: ";
@@ -17,23 +19,34 @@ const setupInput = function(conn) {
   return stdin;
 };
 
+let func;
+
 const handleUserInput = (key) => {
   const stdout = process.stdout;
+  const interval = function(key) {
+    func = setInterval(() => {
+      connection.write(key);
+    }, 100);
+  };
   if (key === '\u0003') {
     stdout.write("Exited snek game. Bye bye.\n");
     process.exit();
   }
   if (key === 'w') {
-    connection.write("Move: up");
+    clearInterval(func);
+    interval(UPKEY);
   }
   if (key === 'a') {
-    connection.write("Move: left");
+    clearInterval(func);
+    interval(LEFTKEY);
   }
   if (key === 's') {
-    connection.write("Move: down");
+    clearInterval(func);
+    interval(DOWNKEY);
   }
   if (key === 'd') {
-    connection.write("Move: right");
+    clearInterval(func);
+    interval(RIGHTKEY);
   }
   if (key === "h") {
     connection.write(msg + hello);
