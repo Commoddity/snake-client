@@ -12,6 +12,9 @@ const connect = function() {
   conn.on('connect', () => {
     console.log("Connected to SERVER!");
     conn.write("Name: PVL");
+    // setInterval( func = () => {
+    //   conn.write("Move: up");
+    // }, 500);
   });
   
   conn.on('data', data => {
